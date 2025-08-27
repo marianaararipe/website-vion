@@ -3,7 +3,7 @@ import Spline from '@splinetool/react-spline';
 
 const Hero = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-r from-[#430065] to-[#8700CB] flex xl:flex-row flex-col-reverse items-center justify-between lg:px-24 px-10 relative overflow-hidden">
+    <section className="min-h-screen bg-[#660099] flex xl:flex-row flex-col-reverse items-center justify-between lg:px-24 px-10 relative overflow-hidden">
 
       {/* Left Section */}
       <div className="z-40 xl:mb-0 mb-[20%] w-full xl:w-1/2 xl:pr-10">

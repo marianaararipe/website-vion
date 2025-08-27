@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar';
+import HeroQuicker from './components/HeroQuicker.jsx';
 import Hero from './components/Hero';
 import Project from './components/Project';
 import Prototype from './components/Prototype';
@@ -17,6 +18,8 @@ const App = () => {
     <main className="bg-black overflow-x-hidden">
       
       <Navbar /> 
+
+      <HeroQuicker />
 
       <Hero />
 
