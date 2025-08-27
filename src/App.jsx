@@ -28,7 +28,7 @@ const App = () => {
 
 
 
-
+{/*}
 
       <Test />
 
@@ -40,6 +40,7 @@ const App = () => {
 
       <HowItWorks />
 
+      {*/}
       <Footer />
     </main>
   )
