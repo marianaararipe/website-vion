@@ -61,7 +61,7 @@ const Hero = () => {
       </div>
 
       {/* Right Section */}
-      <div className="w-full xl:w-1/2 h-[500px] md:h-[600px] lg:h-[800px] xl:translate-x-10">
+      <div className="w-full xl:w-1/2 h-[500px] md:h-[600px] lg:h-[800px] xl:translate-x-20">
         <Spline scene="https://prod.spline.design/h1dchiOP4xFjVre8/scene.splinecode" />
       </div>
 
