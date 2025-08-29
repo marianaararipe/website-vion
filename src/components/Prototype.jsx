@@ -12,35 +12,35 @@ const Prototype = () => {
       label: <LogIn className="w-6 h-6" />,
       title: "Cadastro e Login",
       darkMedia: "/assets/videos/loginRegisterBlack.mp4", // Vídeo para modo escuro
-      lightMedia: "/assets/videos/hero.mp4", // Imagem/vídeo para modo claro (substitua depois)
+      lightMedia: "/assets/videos/loginRegisterWhite.mp4", // Imagem/vídeo para modo claro (substitua depois)
       description: "Cadastre-se rapidamente e faça login com segurança.",
     },
     {
       label: <Home className="w-6 h-6" />,
       title: "Tela Inicial",
       darkMedia: "/assets/videos/telaInicialBlack.mp4",
-      lightMedia: "/assets/videos/explore.mp4", // Substitua depois
+      lightMedia: "/assets/videos/telaInicialWhite.mp4",
       description: "Acompanhe seu progresso e acesse tudo de forma prática.",
     },
     {
       label: <Wifi className="w-6 h-6" />,
       title: "Roteadores",
       darkMedia: "/assets/videos/roteadorBlack.mp4",
-      lightMedia: "/assets/videos/highlight-first.mp4", // Substitua depois
+      lightMedia: "/assets/videos/roteadorWhite.mp4", // Substitua depois
       description: "Gerencie seus roteadores e conexões facilmente.",
     },
     {
       label: <FileText className="w-6 h-6" />,
       title: "Relatórios",
       darkMedia: "/assets/videos/relatoriosBlack.mp4",
-      lightMedia: "/assets/videos/hightlight-sec.mp4", // Substitua depois
+      lightMedia: "/assets/videos/relatoriosWhite.mp4", // Substitua depois
       description: "Visualize relatórios detalhados sobre o uso do app.",
     },
     {
       label: <Settings className="w-6 h-6" />,
       title: "Configurações",
       darkMedia: "/assets/videos/perfilBlack.mp4",
-      lightMedia: "/assets/videos/hightlight-third.mp4", // Substitua depois
+      lightMedia: "/assets/videos/perfilWhite.mp4", // Substitua depois
       description: "Personalize o app de acordo com suas preferências.",
     },
     {

@@ -16,6 +16,8 @@
     "@sentry/react": "^7.106.0",
     "@sentry/vite-plugin": "^2.14.3",
     "@splinetool/react-spline": "^4.1.0",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
     "lucide-react": "^0.541.0",
