@@ -82,7 +82,7 @@ const Statistics = () => {
                       <div className="text-6xl mb-4">📊</div>
                       <h3 className="text-2xl font-semibold mb-2">{carouselItems[currentIndex].title}</h3>
                       <p className="text-lg">{carouselItems[currentIndex].description}</p>
-                      <p className="text-sm mt-4">Gráfico ECharts será inserido aqui</p>
+                      <p className="text-sm mt-4">Gráfico ECharts será inserido aqui - teste</p>
                     </div>
                   </div>
                 </div>
