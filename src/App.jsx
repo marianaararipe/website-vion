@@ -3,6 +3,8 @@ import HeroQuicker from './components/HeroQuicker.jsx';
 import Hero from './components/Hero';
 import Project from './components/Project';
 import Prototype from './components/Prototype';
+import Statistics from './components/Statistics';
+import VideoSection from './components/VideoSection';
 
 import Test from './components/Test';
 import Highlights from './components/Highlights';
@@ -16,34 +18,39 @@ import * as Sentry from '@sentry/react';
 const App = () => {
   return (
     <main className="bg-black overflow-x-hidden">
-      
-      <Navbar /> 
+      <Navbar />
 
-      <HeroQuicker />
+      <section id="home">
+        <HeroQuicker />
+        <Hero />
 
-      <Hero />
-
-      <Project />
-
-      <Prototype />
+      </section>
 
 
+      <section id="projeto">
+        <Project />
+      </section>
 
+      <section id="figma">
+        <Prototype />
+      </section>
 
+      <section id="statistics">
+        <Statistics />
+      </section>
 
-{/*}
+      <section id="video">
+        <VideoSection />
+      </section>
 
+      {/*}
       <Test />
-
       <Highlights />
-
       <Model />
-
       <Features />
-
       <HowItWorks />
-
       {*/}
+
       <Footer />
     </main>
   )

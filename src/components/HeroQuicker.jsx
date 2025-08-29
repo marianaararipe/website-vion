@@ -10,21 +10,33 @@ const HeroQuicker = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
         transition={{ delay: 0.5, duration: 1.5 }}
-        className="absolute text-[8rem] md:text-[12rem] lg:text-[16rem] font-extrabold text-white/20 tracking-widest select-none"
+        className="absolute text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[18rem] 2xl:text-[20rem] font-extrabold tracking-widest select-none text-transparent"
+        style={{
+          WebkitTextStroke: '4px rgba(255, 255, 255, 0.4)',
+          textStroke: '4px rgba(255, 255, 255, 0.4)'
+        }}
       >
         VION
       </motion.h1>
 
-      {/* Robô centralizado */}
+      {/* Robô mais pra direita */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 40, damping: 25, delay: 1 }}
-        className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] z-10"
+        className="relative z-10
+                   w-[320px] h-[320px] 
+                   md:w-[480px] md:h-[480px] 
+                   lg:w-[650px] lg:h-[650px] 
+                   xl:w-[750px] xl:h-[750px] 
+                  2xl:w-[850px] 2xl:h-[850px]
+                   ml-12 lg:ml-32"   // <-- margens empurrando pra direita
       >
-        <Spline scene="https://prod.spline.design/h1dchiOP4xFjVre8/scene.splinecode" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Spline scene="https://prod.spline.design/h1dchiOP4xFjVre8/scene.splinecode" />
+        </div>
       </motion.div>
-      
+
     </section>
   );
 };

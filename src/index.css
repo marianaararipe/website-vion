@@ -16,6 +16,7 @@ body {
   background: #000;
   border-color: #3b3b3b;
   user-select: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 html {
@@ -39,6 +40,10 @@ canvas {
 }
 
 @layer utilities {
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+  
   .flex-center {
     @apply flex items-center justify-center
   }
