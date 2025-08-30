@@ -4,10 +4,26 @@ import { footerLinks } from '../constants'
 const Footer = () => {
   // URLs for each footer link (placeholder URLs - replace with actual URLs later)
   const linkUrls = {
-    "Repositório do site": "#", // Replace with actual GitHub repo URL
-    "Vídeo": "#", // Replace with actual video URL
-    "Relatório": "#", // Replace with actual report URL
-    "Figma": "#", // Replace with actual Figma URL
+    "Repositório do site": "https://github.com/marianaararipe/website-vion", // Replace with actual GitHub repo URL
+    "Vídeo": "https://youtu.be/GxQbik6RCbA", // Replace with actual video URL
+    "Figma": "https://www.figma.com/design/Jbgm1ifwh7qi16D9795VnK/Vion-%7C-Error-504?node-id=2001-501&t=6R9IGAyXVvrtssgC-1", // Replace with actual Figma URL
+  };
+
+  // Função para download do relatório PDF
+  const handleReportDownload = () => {
+    // Aqui você pode substituir pela URL real do seu PDF
+    const pdfUrl = "/assets/Vion_Error504_DD2025.docx.pdf"; // Substitua pela URL real
+    
+    // Cria um link temporário para download
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = "Relatorio-Vion-Error504.pdf";
+    link.target = "_blank";
+    
+    // Adiciona o link ao DOM, clica nele e remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -26,14 +42,23 @@ const Footer = () => {
           <div className="flex items-center">
             {footerLinks.map((link, i) => (
               <React.Fragment key={link}>
-                <a 
-                  href={linkUrls[link]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-gray text-sm hover:text-white transition-colors duration-200 cursor-pointer"
-                >
-                  {link}
-                </a>
+                {link === "Relatório" ? (
+                  <button
+                    onClick={handleReportDownload}
+                    className="font-semibold text-gray text-sm hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    {link}
+                  </button>
+                ) : (
+                  <a 
+                    href={linkUrls[link]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-gray text-sm hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    {link}
+                  </a>
+                )}
                 {i !== footerLinks.length - 1 && (
                   <span className="mx-2 text-gray text-sm"> | </span>
                 )}

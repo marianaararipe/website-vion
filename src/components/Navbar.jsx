@@ -80,7 +80,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="fixed top-5 left-0 right-0 mx-auto w-[95%] sm:w-[85%] md:w-[75%] lg:w-[50%] max-w-[1200px] h-[60px] flex justify-between items-center bg-black/30 rounded-[40px] px-3 sm:px-6 md:px-8 shadow-lg z-[1000]">
+    <header className="fixed top-5 left-0 right-0 mx-auto w-[95%] sm:w-[85%] md:w-[75%] lg:w-[50%] max-w-[1200px] h-[60px] flex justify-between items-center bg-black/30 rounded-[40px] px-4 sm:px-6 md:px-8 shadow-lg z-[1000]">
    
       {/* Logo Vion */}
       <motion.div

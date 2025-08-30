@@ -585,7 +585,7 @@ const Statistics = () => {
       setCurrentIndex((prevIndex) => 
         prevIndex === carouselItems.length - 1 ? 0 : prevIndex + 1
       );
-    }, 10000); // Muda a cada 10 segundos
+    }, 15000); // Muda a cada 15 segundos
 
     return () => clearInterval(interval);
   }, [carouselItems.length]);

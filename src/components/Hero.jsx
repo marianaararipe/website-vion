@@ -57,7 +57,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="py-20 md:min-h-screen bg-gradient-to-r from-[#430065] to-[#8700CB] flex xl:flex-row flex-col items-center justify-center lg:px-24 px-10 relative overflow-hidden">
+    <section className="py-20 md:min-h-screen bg-[#F5F5F5] flex xl:flex-row flex-col items-center justify-center lg:px-24 px-10 relative overflow-hidden">
 
       {/* Left Section - Texto */}
       <div className="z-40 xl:mb-0 mb-[20%] w-full xl:w-1/2 xl:pr-10 text-left flex flex-col items-center xl:items-start">
@@ -72,7 +72,7 @@ const Hero = () => {
              delay: 1.3,
              duration: 1.5
            }}
-           className="text-sm md:text-base lg:text-lg font-semibold z-50 text-white self-start"
+           className="text-sm md:text-base lg:text-lg font-semibold z-50 text-purple-800 self-start"
          >
            ERROR 504 APRESENTA
          </motion.h2>
@@ -87,7 +87,7 @@ const Hero = () => {
              delay: 1.6,
              duration: 1.5
            }}
-           className="text-5xl md:text-7xl lg:text-8xl font-bold z-50 mb-6 text-white self-start"
+           className="text-5xl md:text-7xl lg:text-8xl font-bold z-50 mb-6 text-purple-800 self-start"
          >
            Vion
          </motion.h1>
@@ -102,7 +102,7 @@ const Hero = () => {
             delay: 1.8,
             duration: 1.5
           }}
-          className="text-lg md:text-base lg:text-xl text-white max-w-2xl z-50"
+          className="text-lg md:text-base lg:text-xl text-black max-w-2xl z-50 self-start"
         >
           App com inteligência artificial que analisa seus roteadores, detecta falhas de segurança, garante conexões protegidas e ainda oferece um chatbot para tirar dúvidas e dar dicas práticas de segurança digital.
         </motion.p>
@@ -126,24 +126,18 @@ const Hero = () => {
                 });
               }
             }}
-            className="bg-white h-10 w-32 rounded-full shadow-md hover:bg-gray-100 transition-colors mt-4 text-black font-semibold z-50 self-start cursor-pointer"
+            className="bg-purple-800 h-10 w-32 rounded-full shadow-md hover:bg-purple-700 transition-colors mt-4 text-white font-semibold z-50 self-start cursor-pointer flex items-center justify-center gap-2"
           >
             PROJETO
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7l9.2 9.2M17 7V17H7" />
+            </svg>
           </motion.button>
 
       </div>
 
       {/* Right Section - Celular 3D (oculto no mobile) */}
-      <motion.div 
-        initial={{ opacity: 0, y: 80 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 40,
-          damping: 25,
-          delay: 1.0,
-          duration: 1.5
-        }}
+      <div 
         className="hidden md:block w-full xl:w-1/2 h-[500px] md:h-[600px] lg:h-[800px] relative overflow-hidden"
       >
         <div className="absolute inset-0 flex justify-center overflow-hidden">
@@ -187,7 +181,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
     </section>
   );
