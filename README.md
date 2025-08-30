@@ -4,7 +4,6 @@ Este repositório contém o **site de divulgação do Vion**, criado para o **De
 
 O site apresenta o projeto **Vion**, um aplicativo voltado para **identificação de golpes digitais e segurança de redes domésticas**, fornecendo informações, screenshots e links para interação com o app.
 
-## ![Interface do projeto](https://github.com/Iwanhrq/vion)
 
 ![Interface do projeto](https://github.com/user-attachments/assets/303f2998-a971-4b58-baaa-1843f0658b2a)
 ![Interface do projeto](https://github.com/user-attachments/assets/8764544f-f184-4406-abd5-c43df1bc3a62)
