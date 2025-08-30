@@ -43,8 +43,11 @@ const App = () => {
         <VideoSection />
       </section>
 
+
       {/*}
-      <Test />
+            <Test />
+      <Model />
+
       <Highlights />
       <Model />
       <Features />

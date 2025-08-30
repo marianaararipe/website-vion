@@ -1,0 +1,161 @@
+ /* Estilos para a seção de integrantes */
+                       .integrantes-container {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        overflow: hidden;
+        width: 100%;
+        max-width: 1200px;
+        height: 500px;
+        background: #f3f4f6;
+        border-radius: 24px;
+        padding: 16px;
+      }
+
+                .integrante-option {
+       position: relative;
+       overflow: hidden;
+       min-width: 80px;
+       margin: 8px;
+       background: var(--optionBackground, #E6E9ED);
+       background-size: auto 120%;
+       background-position: center;
+       cursor: pointer;
+       transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+     }
+
+                                .integrante-option.active {
+       flex-grow: 10000;
+       transform: scale(1);
+       max-width: 900px;
+       margin: 0px;
+       border-radius: 40px;
+       background-size: auto 100%;
+     }
+
+
+
+.integrante-option.active .label {
+  bottom: 20px;
+  left: 20px;
+}
+
+.integrante-option.active .label .info > div {
+  left: 0px;
+  opacity: 1;
+}
+
+ .integrante-option:not(.active) {
+   flex-grow: 1;
+   border-radius: 30px;
+   position: relative;
+ }
+
+ .integrante-option:not(.active)::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0, 0, 0, 0.6);
+   z-index: 1;
+   transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+ }
+
+
+
+.integrante-option:not(.active) .label {
+  bottom: 10px;
+  left: 10px;
+}
+
+.integrante-option:not(.active) .label .info > div {
+  left: 20px;
+  opacity: 0;
+}
+
+
+
+ .integrante-option .label {
+   display: flex;
+   position: absolute;
+   right: 0px;
+   height: 40px;
+   transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+   z-index: 2;
+ }
+
+   .integrante-option .label .icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    color: #8b5cf6;
+    font-weight: bold;
+    font-size: 1.125rem;
+  }
+
+.integrante-option .label .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  color: white;
+  white-space: pre;
+}
+
+.integrante-option .label .info > div {
+  position: relative;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity 0.5s ease-out;
+}
+
+   .integrante-option .label .info .main {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+.integrante-option .label .info .sub {
+  transition-delay: 0.1s;
+}
+
+/* Responsividade apenas para mobile */
+@media screen and (max-width: 768px) {
+  .integrantes-container {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .integrantes-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .integrante-option {
+    min-width: 120px;
+    width: 120px;
+    flex-shrink: 0;
+  }
+
+  .integrante-option.active {
+    width: 300px;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .integrante-option {
+    min-width: 100px;
+    width: 100px;
+  }
+
+  .integrante-option.active {
+    width: 250px;
+    max-width: 250px;
+  }
+}

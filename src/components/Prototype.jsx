@@ -53,22 +53,47 @@ const Prototype = () => {
   ];
 
   return (
-    <section className={`min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 transition-colors duration-500 relative ${
-      isDarkMode ? 'bg-black' : 'bg-[#F78DA7]'
-    }`}>
+    <motion.section 
+      className={`min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative ${
+        isDarkMode ? 'bg-black' : 'bg-[#F78DA7]'
+      }`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Interruptor de Modo Claro/Escuro */}
-      <motion.button
-        onClick={() => setIsDarkMode(!isDarkMode)}
-        className={`absolute top-6 right-6 p-4 rounded-full backdrop-blur-sm transition-all duration-300 z-10 shadow-lg ${
+      <motion.div
+        className={`absolute top-6 right-6 flex items-center gap-3 p-3 rounded-full backdrop-blur-sm transition-all duration-300 z-10 shadow-lg ${
           isDarkMode 
-            ? 'bg-white/30 text-white hover:bg-white/50 border-2 border-white/40' 
-            : 'bg-black/40 text-black hover:bg-black/60 border-2 border-black/40'
+            ? 'bg-white/20 text-white hover:bg-white/30 border border-white/30' 
+            : 'bg-black/20 text-black hover:bg-black/30 border border-black/30'
         }`}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.05 }}
       >
-        {isDarkMode ? <Sun className="w-7 h-7" /> : <Moon className="w-7 h-7" />}
-      </motion.button>
+        {/* Texto explicativo */}
+        <motion.span
+          initial={{ opacity: 0, width: 0 }}
+          animate={{ opacity: 1, width: 'auto' }}
+          className="text-sm font-medium whitespace-nowrap hidden sm:block"
+        >
+          {isDarkMode ? 'Ver Modo Claro' : 'Ver Modo Escuro'}
+        </motion.span>
+        
+        {/* Botão com ícone */}
+        <motion.button
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className={`p-2 rounded-full transition-all duration-300 ${
+            isDarkMode 
+              ? 'bg-white/20 hover:bg-white/40' 
+              : 'bg-black/20 hover:bg-black/40'
+          }`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          title={isDarkMode ? 'Alternar para modo claro' : 'Alternar para modo escuro'}
+        >
+          {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        </motion.button>
+      </motion.div>
       
       <div className="flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-16 max-w-7xl mx-auto w-full px-4">
         {/* Barra lateral de tabs - Responsiva */}
@@ -131,7 +156,7 @@ const Prototype = () => {
             animate={{ opacity: 1, y: 0, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-                         <h2 className="text-2xl sm:text-3xl lg:text-5xl leading-tight font-normal">
+                         <h2 className="text-2xl sm:text-3xl lg:text-5xl leading-tight font-normal mb-6">
                <span className={isDarkMode ? 'text-[#EB3C7D]' : 'text-[#660099]'}>
                  {tabs[activeIndex].title}:
                </span>
@@ -140,10 +165,24 @@ const Prototype = () => {
                  {tabs[activeIndex].description}
                </span>
              </h2>
+             
+             {/* Botão para Figma */}
+             <motion.button
+               onClick={() => window.open('https://www.figma.com/proto/SEU_LINK_AQUI', '_blank')}
+               className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
+                 isDarkMode 
+                   ? 'bg-[#EB3C7D] text-white hover:bg-[#d63384]' 
+                   : 'bg-[#660099] text-white hover:bg-[#5a0080]'
+               }`}
+               whileHover={{ scale: 1.05 }}
+               whileTap={{ scale: 0.95 }}
+             >
+               Ver Protótipo no Figma
+             </motion.button>
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

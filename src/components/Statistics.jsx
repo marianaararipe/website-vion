@@ -5,57 +5,107 @@ import ReactECharts from "echarts-for-react";
 
 const Statistics = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   
   // Array com 6 gráficos na ordem especificada
   const carouselItems = [
     { 
       id: 1, 
-      title: "Top 10 Country (CC) dos endereços IP de origem de varreduras e tentativas de ataque",
-      description: "Análise dos países com maior volume de ataques cibernéticos",
+      title: "Top 10 países de origem de ataques (jan-jul/2025): Brasil lidera com 53% dos incidentes, seguido por EUA (29%) e Taiwan (18%).",
+      description: "Distribuição geográfica das tentativas de ataque por país",
       chart: "grafico1"
     },
     { 
       id: 2, 
-      title: "Incidentes Notificados ao CERT.br -- Janeiro a Dezembro de 2024",
-      description: "Distribuição de incidentes por categoria no ano de 2024",
+      title: "Categorias de incidentes (2024): Scans dominaram os registros, representando 81% de todos os incidentes notificados.",
+      description: "Análise da distribuição por tipo de ameaça cibernética",
       chart: "grafico2"
     },
     { 
       id: 3, 
-      title: "Dispositivos com evidências de estarem comprometidos e sendo ativamente abusados",
-      description: "Monitoramento de dispositivos comprometidos por tipo de ameaça",
+      title: "IPs comprometidos (ago/2024–jul/2025): Malware SEO teve pico em nov-dez/2024 e queda constante em 2025.",
+      description: "Evolução temporal de dispositivos comprometidos por tipo de ameaça",
       chart: "grafico3"
     },
     { 
       id: 4, 
-      title: "Incidentes Notificados ao CERT.br -- Janeiro a Julho de 2025",
-      description: "Análise de incidentes de Malware e Phishing em 2025",
+      title: "Fraudes por malware e phishing (jan-jul/2025): Phishing prevaleceu amplamente sobre malware em todos os meses.",
+      description: "Comparativo mensal entre incidentes de malware e phishing",
       chart: "grafico4"
     },
     { 
       id: 5, 
-      title: "Servidores DNS maliciosos no Brasil e fora do Brasil",
-      description: "Evolução temporal de servidores DNS comprometidos",
+      title: "Servidores DNS maliciosos (ago/2023–ago/2025): Brasil apresentou mais oscilações e picos do que servidores internacionais.",
+      description: "Evolução temporal de servidores DNS comprometidos por região",
       chart: "grafico5"
     },
     { 
       id: 6, 
-      title: "Dispositivos com evidências de estarem comprometidos e sendo ativamente abusados",
-      description: "Visão geral de todos os tipos de incidentes por mês",
+      title: "Tipos de incidentes por mês (jan-jun/2025): Scans representaram a maioria dos casos, seguidos por DoS e fraudes.",
+      description: "Distribuição mensal de diferentes categorias de incidentes",
       chart: "grafico6"
     }
   ];
 
+  // Função para determinar o tamanho da tela
+  const getResponsiveConfig = () => {
+    if (windowWidth < 640) { // sm
+      return {
+        titleFontSize: 10,
+        axisLabelFontSize: 8,
+        legendFontSize: 8,
+        gridLeft: "15%",
+        gridRight: "10%",
+        gridBottom: "20%",
+        legendBottom: "5%",
+        legendOrient: "horizontal",
+        legendItemGap: 10,
+        legendItemWidth: 10,
+        legendItemHeight: 8
+      };
+    } else if (windowWidth < 1024) { // lg
+      return {
+        titleFontSize: 12,
+        axisLabelFontSize: 10,
+        legendFontSize: 10,
+        gridLeft: "12%",
+        gridRight: "8%",
+        gridBottom: "18%",
+        legendBottom: "8%",
+        legendOrient: "horizontal",
+        legendItemGap: 15,
+        legendItemWidth: 12,
+        legendItemHeight: 10
+      };
+    } else { // xl e acima
+      return {
+        titleFontSize: 14,
+        axisLabelFontSize: 12,
+        legendFontSize: 12,
+        gridLeft: "10%",
+        gridRight: "5%",
+        gridBottom: "15%",
+        legendBottom: "10%",
+        legendOrient: "horizontal",
+        legendItemGap: 20,
+        legendItemWidth: 15,
+        legendItemHeight: 12
+      };
+    }
+  };
+
   // Configurações dos gráficos
   const getChartOption = (chartType) => {
+    const config = getResponsiveConfig();
+    
     switch (chartType) {
       case "grafico1":
         return {
           title: {
-            text: "Top 10 Country (CC) dos endereços IP de origem de varreduras e tentativas de ataque",
+            text: windowWidth < 640 ? "Top 10 Country (CC) - Ataques" : "Top 10 Country (CC) dos endereços IP de origem de varreduras e tentativas de ataque",
             left: "center",
             textStyle: {
-              fontSize: 14,
+              fontSize: config.titleFontSize,
               fontWeight: "bold",
               color: "white"
             }
@@ -63,15 +113,26 @@ const Statistics = () => {
           tooltip: {
             trigger: "axis",
           },
+          grid: {
+            left: config.gridLeft,
+            right: config.gridRight,
+            bottom: config.gridBottom,
+            containLabel: true
+          },
           xAxis: {
             type: "category",
             data: ["BR","US","TW","CN","KR","SG","JP","HK","GB","DE"],
-            axisLabel: { color: "white" }
+            axisLabel: { 
+              color: "white",
+              fontSize: config.axisLabelFontSize,
+              rotate: windowWidth < 640 ? 45 : 0
+            }
           },
           yAxis: {
             type: "value",
             axisLabel: {
               color: "white",
+              fontSize: config.axisLabelFontSize,
               formatter: (value) => {
                 if (value >= 1000000) return (value/1000000) + "M";
                 if (value >= 1000) return (value/1000) + "k";
@@ -90,10 +151,10 @@ const Statistics = () => {
       case "grafico2":
         return {
           title: {
-            text: "Incidentes Notificados ao CERT.br -- Janeiro a Dezembro de 2024",
+            text: windowWidth < 640 ? "Incidentes CERT.br 2024" : "Incidentes Notificados ao CERT.br -- Janeiro a Dezembro de 2024",
             left: "center",
             textStyle: {
-              fontSize: 14,
+              fontSize: config.titleFontSize,
               fontWeight: "bold",
               color: "white"
             }
@@ -101,10 +162,17 @@ const Statistics = () => {
           tooltip: {
             trigger: "axis",
           },
+          grid: {
+            left: config.gridLeft,
+            right: config.gridRight,
+            bottom: config.gridBottom,
+            containLabel: true
+          },
           xAxis: {
             type: "value",
             axisLabel: {
               color: "white",
+              fontSize: config.axisLabelFontSize,
               formatter: (value) => {
                 if (value >= 1000000) return (value/1000000) + "M";
                 if (value >= 1000) return (value/1000) + "k";
@@ -115,13 +183,16 @@ const Statistics = () => {
           yAxis: {
             name: "Categorias",
             type: "category",
-            data: ["Outros","invasão","Web","Fraude","DoS","Soan"],
+            data: ["Outros","Invasão","Web","Fraude","DoS","Soan"],
             nameTextStyle: {
-              fontSize: 12,
+              fontSize: config.axisLabelFontSize,
               fontWeight: "bold",
               color: "#ffffff"
             },
-            axisLabel: { color: "white" }
+            axisLabel: { 
+              color: "white",
+              fontSize: config.axisLabelFontSize
+            }
           },
           series: [{
             name: "Incidentes",
@@ -134,10 +205,10 @@ const Statistics = () => {
       case "grafico3":
         return {
           title: {
-            text: "Dispositivos com evidências de estarem comprometidos e sendo ativamente abusados",
+            text: windowWidth < 640 ? "Dispositivos Comprometidos" : "Dispositivos com evidências de estarem comprometidos e sendo ativamente abusados",
             left: "center",
             textStyle: {
-              fontSize: 14,
+              fontSize: config.titleFontSize,
               fontWeight: "bold",
               color: "white"
             }
@@ -146,11 +217,21 @@ const Statistics = () => {
             trigger: "axis"
           },
           legend: {
-            bottom: 0,
+            bottom: config.legendBottom,
             data: ["Malware SEO", "Proxy 4145/TCP", "Proxy 5678/TCP"],
             textStyle: {
               color: "white",
-            }
+              fontSize: config.legendFontSize,
+            },
+            itemGap: config.legendItemGap,
+            itemWidth: config.legendItemWidth,
+            itemHeight: config.legendItemHeight
+          },
+          grid: {
+            left: config.gridLeft,
+            right: config.gridRight,
+            bottom: config.gridBottom,
+            containLabel: true
           },
           xAxis: {
             type: "category",
@@ -159,7 +240,11 @@ const Statistics = () => {
               "2024-08","2024-09","2024-10","2024-11","2024-12",
               "2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07"
             ],
-            axisLabel: { color: "#ffffff" },
+            axisLabel: { 
+              color: "#ffffff",
+              fontSize: config.axisLabelFontSize,
+              rotate: windowWidth < 640 ? 45 : 0
+            },
             nameTextStyle: { color: "#ffffff" }
           },
           yAxis: {
@@ -167,6 +252,7 @@ const Statistics = () => {
             name: "IP",
             axisLabel: {
               color: "#ffffff",
+              fontSize: config.axisLabelFontSize,
               formatter: (value) => {
                 if (value >= 1000) return value / 1000 + "k";
                 return value;
@@ -202,10 +288,10 @@ const Statistics = () => {
       case "grafico4":
         return {
           title: {
-            text: "Incidentes Notificados ao CERT.br -- Janeiro a Julho de 2025",
+            text: windowWidth < 640 ? "Incidentes CERT.br 2025" : "Incidentes Notificados ao CERT.br -- Janeiro a Julho de 2025",
             left: "center",
             textStyle: {
-              fontSize: 14,
+              fontSize: config.titleFontSize,
               fontWeight: "bold",
               color: "white"
             }
@@ -215,32 +301,49 @@ const Statistics = () => {
             axisPointer: { type: "shadow" }
           },
           legend: {
-            bottom: 0,
+            bottom: config.legendBottom,
             data: ["Malware", "Phishing"],
-            textStyle: { color: "white" }
+            textStyle: { 
+              color: "white",
+              fontSize: config.legendFontSize
+            },
+            itemGap: config.legendItemGap,
+            itemWidth: config.legendItemWidth,
+            itemHeight: config.legendItemHeight
           },
           grid: {
-            left: "10%",
-            right: "5%",
-            bottom: "15%",
+            left: config.gridLeft,
+            right: config.gridRight,
+            bottom: config.gridBottom,
             containLabel: true
           },
           xAxis: {
             type: "value",
             name: "",
-            axisLabel: { color: "white" }
+            axisLabel: { 
+              color: "white",
+              fontSize: config.axisLabelFontSize
+            }
           },
           yAxis: {
             type: "category",
             data: ["jan", "fev", "mar", "abr", "mai", "jun", "jul"],
-            axisLabel: { color: "white" }
+            axisLabel: { 
+              color: "white",
+              fontSize: config.axisLabelFontSize
+            }
           },
           series: [
             {
               name: "Malware",
               type: "bar",
               stack: "total",
-              label: { show: true, position: "insideLeft", color: "white" },
+              label: { 
+                show: windowWidth >= 640, 
+                position: "insideLeft", 
+                color: "white",
+                fontSize: config.axisLabelFontSize
+              },
               data: [33, 28, 8, 68, 9, 435, 344],
               itemStyle: { color: "#EC4899" }
             },
@@ -248,7 +351,12 @@ const Statistics = () => {
               name: "Phishing",
               type: "bar",
               stack: "total",
-              label: { show: true, position: "insideRight", color: "white" },
+              label: { 
+                show: windowWidth >= 640, 
+                position: "insideRight", 
+                color: "white",
+                fontSize: config.axisLabelFontSize
+              },
               data: [1572, 1717, 1477, 1798, 1727, 1975, 2263],
               itemStyle: { color: "#8B5CF6" }
             }
@@ -258,38 +366,45 @@ const Statistics = () => {
       case "grafico5":
         return {
           title: {
-            text: "Servidores DNS maliciosos no Brasil e fora do Brasil",
+            text: windowWidth < 640 ? "Servidores DNS Maliciosos" : "Servidores DNS maliciosos no Brasil e fora do Brasil",
             left: "center",
             textStyle: {
-              fontSize: 14,
+              fontSize: config.titleFontSize,
               fontWeight: "bold",
               color: "white"
             },
-            subtext: "2023-08-10 -- 2025-08-09",
+            subtext: windowWidth >= 640 ? "2023-08-10 -- 2025-08-09" : "",
             subtextStyle: { color: "white" }
           },
           tooltip: {
             trigger: "axis"
           },
           legend: {
-            bottom: 0,
+            bottom: config.legendBottom,
             data: ["Brasil", "Internacional"],
-            textStyle: { color: "white" }
+            textStyle: { 
+              color: "white",
+              fontSize: config.legendFontSize
+            },
+            itemGap: config.legendItemGap,
+            itemWidth: config.legendItemWidth,
+            itemHeight: config.legendItemHeight
           },
           grid: {
-            left: "8%",
-            right: "5%",
-            bottom: "15%",
+            left: config.gridLeft,
+            right: config.gridRight,
+            bottom: config.gridBottom,
             containLabel: true
           },
           xAxis: {
             type: "time",
             axisLabel: {
               color: "white",
+              fontSize: config.axisLabelFontSize,
               formatter: (value) => {
                 const date = new Date(value);
                 return date.toLocaleDateString("pt-BR", {
-                  day: "2-digit",
+                  day: windowWidth >= 640 ? "2-digit" : undefined,
                   month: "short",
                   year: "numeric"
                 });
@@ -298,8 +413,11 @@ const Statistics = () => {
           },
           yAxis: {
             type: "value",
-            name: "Servidores DNS ativos por dia",
-            axisLabel: { color: "white" },
+            name: windowWidth >= 640 ? "Servidores DNS ativos por dia" : "DNS ativos",
+            axisLabel: { 
+              color: "white",
+              fontSize: config.axisLabelFontSize
+            },
             nameTextStyle: { color: "white" }
           },
           series: [
@@ -339,36 +457,45 @@ const Statistics = () => {
       case "grafico6":
         return {
           title: {
-            text: "Dispositivos com evidências de estarem comprometidos e sendo ativamente abusados",
+            text: windowWidth < 640 ? "Tipos de Incidentes" : "Tipos de incidentes por mês (jan-jun/2025): Scans representaram a maioria dos casos, seguidos por DoS e fraudes.",
             left: "center",
             textStyle: {
-              fontSize: 14,
+              fontSize: config.titleFontSize,
               fontWeight: "bold",
               color: "white"
             }
           },
           legend: {
-            orient: "vertical",
-            left: 0,
-            top: "middle",
+            orient: windowWidth < 640 ? "horizontal" : "vertical",
+            left: windowWidth < 640 ? "center" : 0,
+            top: windowWidth < 640 ? "bottom" : "middle",
             data: ["Total", "DoS", "Fraude", "Invasão", "Scan", "Web", "Outros"],
             textStyle: {
               color: "white",
-              fontSize: 14,
+              fontSize: config.legendFontSize,
               fontWeight: "bold",
             },
-            itemWidth: 15,
-            itemHeight: 10,
-            itemGap: 40
+            itemWidth: config.legendItemWidth,
+            itemHeight: config.legendItemHeight,
+            itemGap: windowWidth < 640 ? 10 : 40
           },
           tooltip: {
             trigger: "axis"
+          },
+          grid: {
+            left: windowWidth < 640 ? config.gridLeft : "15%",
+            right: config.gridRight,
+            bottom: windowWidth < 640 ? config.gridBottom : "15%",
+            containLabel: true
           },
           xAxis: {
             type: "category",
             name: "Mês",
             data: ["jan","fev","mar","abr","mai","jun","total"],
-            axisLabel: { color: "#ffffff" },
+            axisLabel: { 
+              color: "#ffffff",
+              fontSize: config.axisLabelFontSize
+            },
             nameTextStyle: { color: "#ffffff" }
           },
           yAxis: {
@@ -376,6 +503,7 @@ const Statistics = () => {
             name: "IP",
             axisLabel: {
               color: "#ffffff",
+              fontSize: config.axisLabelFontSize,
               formatter: (value) => {
                 if (value >= 1000) return value / 1000 + "k";
                 return value;
@@ -441,13 +569,23 @@ const Statistics = () => {
     }
   };
 
+  // Listener para redimensionamento da janela
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Auto-rotate do carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex === carouselItems.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Muda a cada 5 segundos
+    }, 10000); // Muda a cada 10 segundos
 
     return () => clearInterval(interval);
   }, [carouselItems.length]);
@@ -475,15 +613,15 @@ const Statistics = () => {
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <motion.div 
-          className="text-center mb-24 pt-16"
+          className="text-center mb-12 sm:mb-16 lg:mb-24 pt-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Estatísticas <span className="text-pink-400">Vion</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6">
+            Estatísticas
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-200 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto px-4">
             Visualize dados e insights sobre a segurança digital através de nossos gráficos interativos
           </p>
         </motion.div>
@@ -491,31 +629,32 @@ const Statistics = () => {
         {/* Carousel Container */}
         <div className="relative max-w-7xl mx-auto">
           {/* Carousel */}
-          <div className="relative h-[500px] sm:h-[600px] lg:h-[800px] overflow-hidden rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20">
+          <div className="relative h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden rounded-2xl sm:rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                className="absolute inset-0 flex items-center justify-center p-8"
+                className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 lg:p-8"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
                 {/* Item do Carousel com Gráfico */}
-                <div className="text-center w-full h-full">
-                  <div className="mb-4">
-                    <h3 className="text-xl font-semibold text-white mb-2">
+                <div className="text-center w-full h-full flex flex-col">
+                  <div className="mb-2 sm:mb-4 flex-shrink-0">
+                    <h3 className="text-sm sm:text-lg lg:text-xl font-semibold text-white mb-1 sm:mb-2 px-2">
                       {carouselItems[currentIndex].title}
                     </h3>
-                    <p className="text-gray-300 text-sm">
+                    <p className="text-xs sm:text-sm text-gray-300 px-2">
                       {carouselItems[currentIndex].description}
                     </p>
                   </div>
-                                     <div className="w-full h-[400px] sm:h-[500px] lg:h-[600px] bg-gray-900/80 rounded-2xl border border-white/20 flex items-center justify-center backdrop-blur-sm">
+                  <div className="flex-1 w-full bg-gray-900/80 rounded-xl sm:rounded-2xl border border-white/20 flex items-center justify-center backdrop-blur-sm min-h-0">
                     <ReactECharts 
                       option={getChartOption(carouselItems[currentIndex].chart)}
                       style={{ height: "100%", width: "100%" }}
-                      className="p-4"
+                      className="p-2 sm:p-4"
+                      opts={{ renderer: 'canvas' }}
                     />
                   </div>
                 </div>
@@ -525,41 +664,41 @@ const Statistics = () => {
             {/* Botões de Navegação */}
             <button
               onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 z-10"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 z-10"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
 
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 z-10"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 z-10"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
           </div>
 
           {/* Indicadores */}
-          <div className="flex justify-center mt-8 space-x-3">
+          <div className="flex justify-center mt-4 sm:mt-6 lg:mt-8 space-x-2 sm:space-x-3">
             {carouselItems.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? 'bg-pink-400 w-8' 
-                    : 'bg-white/40 hover:bg-white/60'
+                    ? 'bg-pink-400 w-6 sm:w-8' 
+                    : 'bg-white/40 hover:bg-white/60 w-2 sm:w-3'
                 }`}
               />
             ))}
           </div>
 
           {/* Contador */}
-          <div className="text-center mt-6">
-            <span className="text-white/80 text-lg">
+          <div className="text-center mt-4 sm:mt-6">
+            <span className="text-white/80 text-sm sm:text-lg">
               {currentIndex + 1} de {carouselItems.length}
             </span>
           </div>

@@ -33,7 +33,7 @@ const HeroQuicker = () => {
                    ml-12 lg:ml-32"   // <-- margens empurrando pra direita
       >
         <div className="absolute inset-0 flex items-center justify-center">
-          <Spline scene="https://prod.spline.design/h1dchiOP4xFjVre8/scene.splinecode" />
+        <Spline scene="https://prod.spline.design/3Q14QOn-ubSf0vOS/scene.splinecode" />
         </div>
       </motion.div>
 
