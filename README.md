@@ -9,7 +9,6 @@ O site apresenta o projeto **Vion**, um aplicativo voltado para **identificaçã
 ![Interface do projeto](https://github.com/user-attachments/assets/8764544f-f184-4406-abd5-c43df1bc3a62)
 
 
-
 ---
 
 ## 🔍 Funcionalidades
